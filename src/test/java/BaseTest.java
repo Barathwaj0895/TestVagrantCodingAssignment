@@ -40,19 +40,14 @@ public class BaseTest {
     }
 
 
-
-
     @BeforeMethod
     @Parameters(value ={"browserName"})
     public void beforeMethodMethod(String browserName, Method testMethod) {
         logger= extentReports.createTest(testMethod.getName());
         setupDriver(browserName);
         driver.manage().window().maximize();
-        driver.get(WikipediaHomePageElements.getWikipediaUrl);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
-
-
 
 
     @AfterMethod

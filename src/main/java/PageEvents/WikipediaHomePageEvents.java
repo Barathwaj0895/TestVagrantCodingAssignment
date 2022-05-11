@@ -4,13 +4,16 @@ import main.java.PageObjects.WikipediaHomePageElements;
 import main.java.Utils.ElementFetch;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class WikipediaHomePageEvents implements WikipediaHomePageElements {
+import static test.java.BaseTest.driver;
+
+public class WikipediaHomePageEvents {
     ElementFetch elementFetch = new ElementFetch();
 
     public void getWikipediaHomePage() {
-        elementFetch.getUrl("getWikipediaUrl");
+        driver.get(WikipediaHomePageElements.getWikipediaUrl);
     }
 
     public void getSearchBarAndInputSearchText() {
@@ -22,22 +25,47 @@ public class WikipediaHomePageEvents implements WikipediaHomePageElements {
     }
 
     public boolean getPageTitle() {
-        return elementFetch.getWebElement("XPATH", WikipediaHomePageElements.getWikiPediaPageTitle).equals("Pushpa: The Rise");
+        System.out.println(elementFetch.getWebElement("XPATH", WikipediaHomePageElements.getWikiPediaPageTitle).getText());
+        return elementFetch.getWebElement("XPATH", WikipediaHomePageElements.getWikiPediaPageTitle).getText().equalsIgnoreCase("Pushpa: The Rise");
     }
 
-    public void getMovieReleaseDateAndCountry() {
+    public String getMovieReleaseDate() {
+        ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
+        String oldTab = driver.getWindowHandle();
+        driver.switchTo().window(oldTab);
+        driver.switchTo().window(newTab.get(0));
         elementFetch.getWebElement("XPATH", WikipediaHomePageElements.getWikipediaTable);
-        List<WebElement> tableRows = elementFetch.getListWebElements("TAGNAME",WikipediaHomePageElements.getWikipediaRow);
-        String strRowData = "";
-
-        for (WebElement tr: tableRows) {
-            List<WebElement> lstColumnData = elementFetch.getListWebElements("TAGNAME", WikipediaHomePageElements.getWikipediaRowData);
-            if (lstColumnData.size()>0) {
-                for (WebElement tbleColmnData: lstColumnData) {
-                    strRowData = strRowData + tbleColmnData.getText();
-                    System.out.println(strRowData);
-                }
-            }
+        List<WebElement> listright = elementFetch.getListWebElements("XPATH", WikipediaHomePageElements.getWikipediaTableRHS);
+        List<String> rhs = new ArrayList<String>();
+        for (WebElement tr : listright) {
+            rhs.add(tr.getText().toString());
         }
+        List<WebElement> listleft = elementFetch.getListWebElements("XPATH", WikipediaHomePageElements.getWikipediaTableLHS);
+        List<String> lhs = new ArrayList<String>();
+        for (WebElement tr : listleft) {
+            lhs.add(tr.getText().toString());
+        }
+        int li = lhs.indexOf("Country");
+        int si = lhs.indexOf("Release date");
+        System.out.println(rhs.get(si).replace(" (India)", ""));
+        return rhs.get(si).replace(" (India)", "");
+    }
+
+    public String getMovieCountry(){
+        elementFetch.getWebElement("XPATH", WikipediaHomePageElements.getWikipediaTable);
+        List<WebElement> listright = elementFetch.getListWebElements("XPATH", WikipediaHomePageElements.getWikipediaTableRHS);
+        List<String> rhs = new ArrayList<String>();
+        for (WebElement tr : listright) {
+            rhs.add(tr.getText().toString());
+        }
+        List<WebElement> listleft = elementFetch.getListWebElements("XPATH", WikipediaHomePageElements.getWikipediaTableLHS);
+        List<String> lhs = new ArrayList<String>();
+        for (WebElement tr : listleft) {
+            lhs.add(tr.getText().toString());
+        }
+        int li = lhs.indexOf("Country");
+        int si = lhs.indexOf("Release date");
+        System.out.println("Country of Pushpa-The Rise is " + rhs.get(li));
+        return rhs.get(li);
     }
 }
