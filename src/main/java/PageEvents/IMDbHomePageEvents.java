@@ -5,17 +5,25 @@ import main.java.Utils.ElementFetch;
 import org.openqa.selenium.Keys;
 import org.testng.Assert;
 
-import java.util.Set;
-
 import static test.java.BaseTest.driver;
 
+/**
+ * This class has been created by Barathwaj Ravisankar on May 12, 2022
+ * This class contains all the necessary Page events/method of IMDb Page.
+ */
 public class IMDbHomePageEvents {
     ElementFetch elementFetch = new ElementFetch();
 
+    /**
+     * Method to get IMDb Home Page
+     */
     public void getIMBdHomePage() {
         driver.get(IMDbHomePageElements.getIMDbUrl);
     }
 
+    /**
+     * Method to get search bar and input the Text to search
+     */
     public void searchForMovie() {
         elementFetch.getWebElement("XPATH", IMDbHomePageElements.getIMDbSearchTextBox).isDisplayed();
         elementFetch.getWebElement("XPATH", IMDbHomePageElements.getIMDbSearchTextBox).click();
@@ -25,29 +33,43 @@ public class IMDbHomePageEvents {
 
     }
 
+    /**
+     * Method to get movie title
+     *
+     * @return movie title
+     */
     public boolean validateMovieTitleInIMDbPage() {
         String movieName = elementFetch.getWebElement("XPATH", IMDbHomePageElements.getMovieTitle).getText();
         System.out.println(movieName);
         return movieName.equalsIgnoreCase(IMDbHomePageElements.movieToSearch);
     }
 
-    public String  getMovieOriginCountry() throws InterruptedException {
-        String selectOpenInNewTab = Keys.chord(Keys.CONTROL,Keys.RETURN);
+    /**
+     * Method to get Movie Origin Country
+     *
+     * @return movie Country as String.
+     */
+    public String getMovieOriginCountry() throws InterruptedException {
+        String selectOpenInNewTab = Keys.chord(Keys.CONTROL, Keys.RETURN);
         elementFetch.getWebElement("XPATH", IMDbHomePageElements.getIDMbLinkUrlFromWikiPage).sendKeys(selectOpenInNewTab);
         Thread.sleep(5000);
         for (String winHandle : driver.getWindowHandles()) { //Gets the new window handle
             driver.switchTo().window(winHandle);  // switch focus of WebDriver to the next found window handle (that's your newly opened window)
         }
         Assert.assertTrue(validateMovieTitleInIMDbPage(), "Movie Name is Incorrect");
-//        validateMovieTitleInIMDbPage();
         String movieOrigin = elementFetch.getWebElement("XPATH", IMDbHomePageElements.getMovieOrigin).getText();
         String movieOriginSplit[] = movieOrigin.split(" ");
-        String str = movieOriginSplit[2].substring(6,12).trim();
+        String str = movieOriginSplit[2].substring(6, 12).trim();
         return str;
     }
 
+    /**
+     * Method to get Movie Release Date
+     *
+     * @return movie Release Date as String.
+     */
     public String getMovieReleaseDate() throws InterruptedException {
-        String selectOpenInNewTab = Keys.chord(Keys.CONTROL,Keys.RETURN);
+        String selectOpenInNewTab = Keys.chord(Keys.CONTROL, Keys.RETURN);
         elementFetch.getWebElement("XPATH", IMDbHomePageElements.getIDMbLinkUrlFromWikiPage).sendKeys(selectOpenInNewTab);
         Thread.sleep(5000);
         for (String winHandle : driver.getWindowHandles()) { //Gets the new window handle

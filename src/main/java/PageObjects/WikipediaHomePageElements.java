@@ -1,5 +1,9 @@
 package main.java.PageObjects;
 
+/**
+ * This class has been created by Barathwaj Ravisankar on May 12, 2022
+ * This class contains all the necessary Page elements of WikiPedia Page.
+ */
 public interface WikipediaHomePageElements {
     String getWikipediaLogo = "//a[@class='mw-wiki-logo']";
     String getWikipediaSearchBar = "//input[@class='vector-search-box-input']";

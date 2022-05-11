@@ -9,13 +9,23 @@ import java.util.List;
 
 import static test.java.BaseTest.driver;
 
+/**
+ * This class has been created by Barathwaj Ravisankar on May 12, 2022
+ * This class contains all the necessary Page events/method of WikiPedia Page.
+ */
 public class WikipediaHomePageEvents {
     ElementFetch elementFetch = new ElementFetch();
 
+    /**
+     * Method to get Wikipedia Home Page
+     */
     public void getWikipediaHomePage() {
         driver.get(WikipediaHomePageElements.getWikipediaUrl);
     }
 
+    /**
+     * Method to get search bar and input the Text to search
+     */
     public void getSearchBarAndInputSearchText() {
         elementFetch.getWebElement("XPATH", WikipediaHomePageElements.getWikipediaSearchBar).isDisplayed();
         elementFetch.getWebElement("XPATH", WikipediaHomePageElements.getWikipediaSearchBar).click();
@@ -24,11 +34,22 @@ public class WikipediaHomePageEvents {
         elementFetch.getWebElement("XPATH", WikipediaHomePageElements.getWikipediaSearchButton).click();
     }
 
+    /**
+     * Method to get Page Title
+     *
+     * @return: String of Title
+     */
+
     public boolean getPageTitle() {
         System.out.println(elementFetch.getWebElement("XPATH", WikipediaHomePageElements.getWikiPediaPageTitle).getText());
         return elementFetch.getWebElement("XPATH", WikipediaHomePageElements.getWikiPediaPageTitle).getText().equalsIgnoreCase("Pushpa: The Rise");
     }
 
+    /**
+     * Method to get Movie Release Date
+     *
+     * @return movie Release Date as String.
+     */
     public String getMovieReleaseDate() {
         ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
         String oldTab = driver.getWindowHandle();
@@ -51,7 +72,12 @@ public class WikipediaHomePageEvents {
         return rhs.get(si).replace(" (India)", "");
     }
 
-    public String getMovieCountry(){
+    /**
+     * Method to get Movie Origin Country
+     *
+     * @return movie Country as String.
+     */
+    public String getMovieCountry() {
         elementFetch.getWebElement("XPATH", WikipediaHomePageElements.getWikipediaTable);
         List<WebElement> listright = elementFetch.getListWebElements("XPATH", WikipediaHomePageElements.getWikipediaTableRHS);
         List<String> rhs = new ArrayList<String>();

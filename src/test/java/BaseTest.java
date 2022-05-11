@@ -9,7 +9,6 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import main.java.PageObjects.WikipediaHomePageElements;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -20,6 +19,9 @@ import java.io.File;
 import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * This class has been created by Barathwaj Ravisankar on May 12, 2022
+ */
 public class BaseTest {
 
     public static WebDriver driver;
@@ -29,7 +31,7 @@ public class BaseTest {
 
     @BeforeTest
     public void beforeTestMethod() {
-        htmlReporter =  new ExtentHtmlReporter(System.getProperty("user.dir") + File.separator + "reports" + File.separator + "AutomationReport.html");
+        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + File.separator + "reports" + File.separator + "AutomationReport.html");
         htmlReporter.config().setEncoding("utf-8");
         htmlReporter.config().setDocumentTitle("Automation Report");
         htmlReporter.config().setReportName("Automation Test Results");
@@ -41,9 +43,9 @@ public class BaseTest {
 
 
     @BeforeMethod
-    @Parameters(value ={"browserName"})
+    @Parameters(value = {"browserName"})
     public void beforeMethodMethod(String browserName, Method testMethod) {
-        logger= extentReports.createTest(testMethod.getName());
+        logger = extentReports.createTest(testMethod.getName());
         setupDriver(browserName);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -52,21 +54,19 @@ public class BaseTest {
 
     @AfterMethod
     public void afterMethodMethod(ITestResult result) {
-        if(result.getStatus()== ITestResult.SUCCESS) {
+        if (result.getStatus() == ITestResult.SUCCESS) {
             String methodName = result.getMethod().getMethodName();
             String logText = "Test Case:" + methodName + "Passed";
             Markup markup = MarkupHelper.createLabel(logText, ExtentColor.GREEN);
-            logger.log(Status.PASS,markup);
-        } else if (result.getStatus()== ITestResult.FAILURE) {
+            logger.log(Status.PASS, markup);
+        } else if (result.getStatus() == ITestResult.FAILURE) {
             String methodName = result.getMethod().getMethodName();
             String logText = "Test Case:" + methodName + "Failed";
             Markup markup = MarkupHelper.createLabel(logText, ExtentColor.RED);
-            logger.log(Status.PASS,markup);
+            logger.log(Status.PASS, markup);
         }
         driver.quit();
     }
-
-
 
 
     @AfterTest
@@ -75,7 +75,7 @@ public class BaseTest {
     }
 
     public void setupDriver(String browserName) {
-        if (browserName.equalsIgnoreCase("chrome")){
+        if (browserName.equalsIgnoreCase("chrome")) {
 //            System.setProperty("webdriver.chrome.driver", "C:\\Users\\Barathwaj.Ravisankar\\IdeaProjects\\TestVagrantCodingAssignment\\drivers\\chromedriver.exe");
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();

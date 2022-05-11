@@ -1,7 +1,11 @@
 package main.java.PageObjects;
 
+/**
+ * This interface has been created by Barathwaj Ravisankar on May 12, 2022
+ * This class contains all the Page elements of IMDb Page.
+ */
 public interface IMDbHomePageElements {
-    String  getIMDbUrl = "https://www.imdb.com/";
+    String getIMDbUrl = "https://www.imdb.com/";
     String getIMDbSearchTextBox = "//input[@aria-label='Search IMDb']";
     String getIMDbSearchButton = "//button[@aria-label='Submit Search']";
     String movieToSearch = "Pushpa: The Rise - Part 1";

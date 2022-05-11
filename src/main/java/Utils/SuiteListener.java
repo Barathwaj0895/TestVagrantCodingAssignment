@@ -15,15 +15,18 @@ import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
+/**
+ * This class has been created by Barathwaj Ravisankar on May 12, 2022
+ */
 public class SuiteListener implements ITestListener, IAnnotationTransformer {
 
-@Override
-    public void onTestStart(ITestResult iTestResult){
+    @Override
+    public void onTestStart(ITestResult iTestResult) {
 
-}
+    }
 
     @Override
-    public void onTestSuccess(ITestResult iTestResult){
+    public void onTestSuccess(ITestResult iTestResult) {
 
     }
 
@@ -32,35 +35,35 @@ public class SuiteListener implements ITestListener, IAnnotationTransformer {
         String fileName = System.getProperty("user.dir") + File.separator + "screenshots" + File.separator + iTestResult.getMethod().getMethodName();
         File file = ((TakesScreenshot) BaseTest.driver).getScreenshotAs(OutputType.FILE);
 
-            try {
-                FileUtils.copyFile(file, new File(fileName + ".png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            FileUtils.copyFile(file, new File(fileName + ".png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void onTestSkipped(ITestResult iTestResult){
-
-    }
-
-    @Override
-    public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult){
+    public void onTestSkipped(ITestResult iTestResult) {
 
     }
 
     @Override
-    public void onStart(ITestContext iTestContext){
+    public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
 
     }
 
     @Override
-    public void onFinish(ITestContext iTestContext){
+    public void onStart(ITestContext iTestContext) {
+
+    }
+
+    @Override
+    public void onFinish(ITestContext iTestContext) {
 
     }
 
     @Override
     public void transform(ITestAnnotation iTestAnnotation, Class aClass, Constructor constructor, Method method) {
-    iTestAnnotation.setRetryAnalyzer(RetryAnalyzer.class);
+        iTestAnnotation.setRetryAnalyzer(RetryAnalyzer.class);
     }
 }

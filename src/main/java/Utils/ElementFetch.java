@@ -6,9 +6,12 @@ import test.java.BaseTest;
 
 import java.util.List;
 
+/**
+ * This class has been created by Barathwaj Ravisankar on May 12, 2022
+ */
 public class ElementFetch {
 
-    public WebElement getWebElement (String identifierType, String identifierValue) {
+    public WebElement getWebElement(String identifierType, String identifierValue) {
         switch (identifierType) {
             case "ID":
                 return BaseTest.driver.findElement(By.id(identifierValue));
@@ -29,11 +32,11 @@ public class ElementFetch {
         }
     }
 
-    public void getUrl (String url) {
+    public void getUrl(String url) {
         BaseTest.driver.get(url);
     }
 
-    public List<WebElement> getListWebElements (String identifierType, String identifierValue) {
+    public List<WebElement> getListWebElements(String identifierType, String identifierValue) {
         switch (identifierType) {
             case "ID":
                 return BaseTest.driver.findElements(By.id(identifierValue));
