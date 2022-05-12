@@ -52,13 +52,13 @@ jobs:
     artifact: # optional
     # Name of the check run
     name: 
-    # Coma separated list of paths to test results
-Supports wildcards via [fast-glob](https://github.com/mrmlnc/fast-glob) All matched result files must be of same format
+    # Coma separated list of paths to test results 
+    # Supports wildcards via [fast-glob](https://github.com/mrmlnc/fast-glob) All matched result files must be of same format
 
     path: 
     # The fast-glob library that is internally used interprets backslashes as escape characters.
-If enabled, all backslashes in provided path will be replaced by forward slashes and act as directory separators.
-It might be useful when path input variable is composed dynamically from existing directory paths on Windows.
+    # If enabled, all backslashes in provided path will be replaced by forward slashes and act as directory separators.
+    # It might be useful when path input variable is composed dynamically from existing directory paths on Windows.
 
     path-replace-backslashes: # optional, default is false
     # Format of test results. Supported options:
