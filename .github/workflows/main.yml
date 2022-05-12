@@ -29,13 +29,13 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
         
-      - name: List Current Directory
-        run: ls -a
+#       - name: List Current Directory
+#         run: ls -a
 
-      - name: List in Target Folder
-        run:  |
-          cd target
-          ls -a
+#       - name: List in Target Folder
+#         run:  |
+#           cd target
+#           ls -a
           
       - name: Test with Maven Part 1
         run: mvn clean test
