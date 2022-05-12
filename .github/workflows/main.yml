@@ -43,6 +43,12 @@ jobs:
       - name: Test with Maven
         run: mvn -B package --file pom.xml test
         
+      - name: Build
+        run: mvn --batch-mode -DskipTests package
+
+      - name: Test
+        run: mvn --batch-mode -Dmaven.test.failure.ignore=true test  
+        
       - name: Test Reporter
         uses: dorny/test-reporter@v1.4.3
         with:
