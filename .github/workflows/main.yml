@@ -49,10 +49,10 @@ jobs:
       - name: Test
         run: mvn --batch-mode -Dmaven.test.failure.ignore=true test  
         
-#       - name: Test Reporter
-#         uses: dorny/test-reporter@v1.4.3
-#         with:
-#            name: Run Tests
-#            path: "target/surefire-reports/*.html"
-#            # path: "target/surefire-reports/junitreports/TEST-*.xml"
-#            reporter: java-junit
+      - name: Test Reporter
+        uses: dorny/test-reporter@v1.4.3
+        with:
+           name: Run Tests
+           path: "target/surefire-reports/*.html"
+           # path: "target/surefire-reports/junitreports/TEST-*.xml"
+           reporter: java-junit
